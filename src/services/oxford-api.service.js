@@ -19,14 +19,15 @@ if (config.env !== 'test') {
  * @returns {Promise}
  */
 const sendRequest = async (word) => {
-  const response = await axios.get(`https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/${word}?strictMatch=false`, {
+  const { data } = await axios.get(`https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/${word}?strictMatch=false`, {
     headers: {
       Accept: 'application/json',
       app_id: config.oxfordApi.id,
       app_key: config.oxfordApi.key,
     },
   });
-  return response;
+  console.log('this is response:', data);
+  return data;
 };
 
 /**
@@ -36,13 +37,8 @@ const sendRequest = async (word) => {
  * @returns {Promise}
  */
 const getDefinition = async (word, type) => {
-  if (type === 'adjective') {
-    const result = await sendRequest(word);
-    return result;
-  } else {
-    const result = await sendRequest(word);
-    return result;
-  }
+  const result = await sendRequest(word);
+  return result;
 };
 
 module.exports = {

@@ -3,9 +3,13 @@ const catchAsync = require('../utils/catchAsync');
 const { oxfordApi } = require('../services');
 
 const getDefinition = catchAsync(async (req, res) => {
-  const definition = await oxfordApi.getDefinition(req.params.word);
-
-  res.status(httpStatus.CREATED).send(definition);
+  // console.log(req);
+  const definitionResult = await oxfordApi.getDefinition(req.query.word);
+  if (definitionResult) {
+    res.status(httpStatus.CREATED).json({ result: definitionResult.results });
+  } else {
+    res.sendStatus(500);
+  }
 });
 
 module.exports = {
