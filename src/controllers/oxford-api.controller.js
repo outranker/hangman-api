@@ -6,7 +6,7 @@ const getDefinition = catchAsync(async (req, res) => {
   // console.log(req);
   const definitionResult = await oxfordApi.getDefinition(req.query.word);
   if (definitionResult) {
-    res.status(httpStatus.CREATED).json({ result: definitionResult.results });
+    res.status(httpStatus.CREATED).json({ result: definitionResult });
   } else {
     res.sendStatus(500);
   }
